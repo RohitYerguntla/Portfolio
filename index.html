@@ -1,257 +1,219 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopper</title>
-    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
-    <style>
-        header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            font-family: Arial;
-        }
-        .brand-title {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        header  span {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        article {
-            background-color: black;
-            color:white;
-            text-align: center;
-            padding: 15px;
-            font-size: 20px;
-        }
-        .bi-lightning-fill {
-            color:gold;
-        }
-        main {
-            height: 500px;
-            display: grid;
-            grid-template-columns: 4fr 4fr 4fr;
-            margin-top: 10px;
-        }
-        .women-fashion {
-            background-image: url("./public/images/cover-1.jpg");
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-        }
-        .men-fashion {
-            background-image: url("./public/images/cover-2.jpg");
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-        }
-        .kids-fashion {
-            background-image: url("./public/images/cover-3.jpg");
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-around;
-        }
-        .main-title {
-            font-size: 45px;
-            color:white;
-            font-family: Arial;
-            font-weight: bold;
-            text-shadow: 2px 2px 2px black;
-        }
-        .shop-button {
-            background-color: white;
-            width: 130px;
-            padding: 10px;
-            text-align: center;
-        }
-        .services {
-            margin-top: 20px;
-            padding: 20px;
-            display: grid;
-            grid-template-columns: 3fr 3fr 3fr 3fr;
-        }
-        section {
-            height: 800px;
-        }
-        footer {
-            background-color: black;
-            color:white;
-            padding: 20px;
-        }
-        .subscribe-container {
-            padding-top: 40px;
-            text-align: center;
-            font-family: Arial;
-        }
-        .sub-title {
-            font-size: 30px;
-            padding-bottom: 30px;
-        }
-        .email {
-            background-color: gray;
-            padding: 20px;
-            width: 300px;
-            display: inline-block;
-            text-align: left;
-        }
-        .btn-subscribe {
-            background-color: darkslategray;
-            color: white;
-            padding: 20px;
-            width: 150px;
-            display: inline-block;
-        }
-        .services-container {
-            padding-top: 80px;
-            display: grid;
-            grid-template-columns: 2.4fr 2.4fr 2.4fr 2.4fr 2.4fr;
-        }
-        .service-title {
-            font-weight: bold;
-            padding-bottom: 20px;
-            font-family: Arial;
-        }
-        .service-topics span {
-            display: block;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            font-family: Arial;
-        }
-        .footer-brand-title {
-            font-size: 25px;
-            font-weight: bold;
-            font-family: Arial;
-            padding-bottom: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Webpage</title>
+
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+  }
+  
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+  }
+  
+  /* Sidebar Styling */
+.sidebar {
+    width: 25%;
+    background-color: #f4f4f4;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%); /* Hidden by default */
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .sidebar.visible {
+    transform: translateX(0); /* Slide in when visible */
+  }
+  
+  /* Menu Icon Button */
+  .menu-icon {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100; /* Higher z-index than sidebar */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .menu-icon:hover {
+    background-color: #555;
+  }
+  
+  .profile {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-pic {
+    width: 200px;
+    height: 200px;
+    background-color: #ddd;
+    border-radius: 200px;
+    margin-bottom: 10px;
+  }
+  .profile-pic img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    margin-bottom: 15px;
+}
+  .name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .links a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: #333;
+  }
+  .links a.active {
+    font-weight: bold;
+    color: #007BFF;
+    text-decoration: underline;
+  }
+  
+  .links a:hover {
+    text-decoration: underline;
+    color: #007BFF;
+  }
+  
+  .main {
+    width: 100vw;
+    padding: 20px;
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .content {
+    text-align: center;
+    font-size: 18px;
+  }
+  
+
+
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 70%; /* Adjust width for smaller screens */
+    }
+  }
+  
+  </style>
 </head>
 <body>
-   <header>
-      <div>
-         <span class="brand-title">Shopper</span>
-      </div>
-      <div>
-        <nav>
-            <span>Home</span>
-            <span>Pages</span>
-            <span>Blog</span>
-            <span>Docs</span>
-            <span>Shop</span>
-            <span>Catalog</span>
-        </nav>
-      </div>
-      <div>
-         <span class="bi bi-search"></span>
-         <span class="bi bi-person"></span>
-         <span class="bi bi-heart"></span>
-         <span class="bi bi-cart3"></span>
-      </div>
-   </header>
-   <section>
-    <article>
-        <span class="bi bi-lightning-fill"></span>
-        <span> HAPPY HOLIDAY DEALS ON EVERYTHING </span>
-        <span class="bi bi-lightning-fill"></span>
-     </article>
-     <main>
-        <div class="women-fashion">
-            <div class="main-title">Women</div>
-            <div class="shop-button">Shop Women <span class="bi bi-arrow-right"></span> </div>
-        </div>
-        <div class="men-fashion">
-            <div class="main-title">Men</div>
-            <div class="shop-button">Shop Men <span class="bi bi-arrow-right"></span> </div>
-        </div>
-        <div class="kids-fashion">
-            <div class="main-title">Kids</div>
-            <div class="shop-button">Shop Kids <span class="bi bi-arrow-right"></span> </div>
-        </div>
-     </main>
-     <div class="services">
-        <div>
-            <div> <span class="bi bi-truck"></span> Free Shipping </div>
-            <div> From all orders above 100 </div>
-        </div>
-        <div>
-            <div> <span class="bi bi-arrow-left-right"></span> Free Returns </div>
-            <div> Return money within 30 days </div>
-        </div>
-        <div>
-            <div> <span class="bi bi-lock"></span> Secure Shopping </div>
-            <div>You're in safe hands</div>
-        </div>
-        <div>
-            <div> <span class="bi bi-tag"></span> Over 10,000 styles </div>
-            <div>We have everything you need</div>
-        </div>
-     </div>
-   </section>
-   <footer>
-      <div class="subscribe-container">
-            <div class="sub-title">Want style Ideas and Treats?</div>
-            <div>
-                <span class="email">Enter Email*</span>
-                <span class="btn-subscribe">Subscribe</span>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+          <div class="profile">
+            <div class="profile-pic">
+                <img src="./Images/Photo.jpg" alt="Profile Picture">
             </div>
+            <h2 class="name">Rohit Yerguntla</h2>
+          </div>
+          <div class="links">
+            <a href="#details">Details</a>
+            <a href="#contact">Contact</a>
+            <a href="#resume">Resume</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#results">Results</a>
+          </div>
+        </div>
+      
+        <!-- Menu Icon -->
+        <button class="menu-icon" id="menu-toggle">☰</button>
+      
+        <!-- Main Content -->
+        <div class="main">
+          <h1 class="title">Title</h1>
+          <div class="content" id="content">
+            <p>Changing content based on titles and anchor tags</p>
+          </div>
+        </div>
       </div>
-      <div class="services-container">
-          <div>
-              <div class="footer-brand-title">Shopper</div>
-              <div>
-                 <aside>
-                     <span class="bi bi-facebook"></span>
-                     <span class="bi bi-youtube"></span>
-                     <span class="bi bi-twitter"></span>
-                     <span class="bi bi-instagram"></span>
-                     <span class="bi bi-linkedin"></span>
-                 </aside>
-              </div>
-          </div>
-          <div>
-              <div class="service-title">Support</div>
-              <div class="service-topics">
-                <span>Contact Us</span>
-                <span>FAQs</span>
-                <span>Size Guide</span>
-                <span>Shipping & Returns</span>
-              </div>
-          </div>
-          <div>
-            <div class="service-title">SHOP</div>
-            <div class="service-topics">
-                <span>Men's Shopping</span>
-                <span>Women's Shopping</span>
-                <span>Kids' Shopping</span>
-                <span>Discounts</span>
-            </div>
-          </div>
-          <div>
-            <div class="service-title">COMPANY</div>
-            <div class="service-topics">
-               <span> Our Story</span>
-                <span>Careers</span>
-                <span>Terms & Conditions</span>
-                <span>Privacy & Cookie policy</span>
-            </div>
-          </div>
-          <div>
-            <div class="service-title">CONTACT</div>
-            <address class="service-topics">
-                <span>1-202-555-0105</span>
-                <span>1-202-555-0106</span>
-                <span>help@shopper.com</span>
-            </address>
-          </div>
-      </div>
-   </footer>
+      
+  <script>
+    const sidebar = document.getElementById("sidebar");
+const menuToggle = document.getElementById("menu-toggle");
+const links = document.querySelectorAll(".links a");
+const title = document.querySelector(".title");
+const content = document.querySelector("#content");
+
+// Content for each section
+const sectionContent = {
+  details: "This is the Details section where you can include your personal details.",
+  contact: "This is the Contact section where you can include your phone and email.",
+  resume: "This is the Resume section where you can include your professional experience.",
+  projects: "This is the Projects section where you can showcase your work.",
+  education: "This is the Education section where you can list your qualifications.",
+  results: "This is the Results section where you can display outcomes or achievements.",
+};
+
+// Toggle sidebar visibility
+menuToggle.addEventListener("click", () => {
+  sidebar.classList.toggle("visible");
+});
+
+// Add event listeners to all links
+links.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Get the section ID from the href attribute
+    const sectionId = link.getAttribute("href").substring(1);
+
+    // Update the title and content dynamically
+    title.textContent = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+    content.innerHTML = `<p>${sectionContent[sectionId]}</p>`;
+
+    // Highlight the active link
+    links.forEach((link) => link.classList.remove("active"));
+    link.classList.add("active");
+
+    // Hide the sidebar (optional for mobile navigation)
+    sidebar.classList.remove("visible");
+  });
+});
+
+// Highlight the first link and load default content on page load
+window.addEventListener("DOMContentLoaded", () => {
+  links[0].classList.add("active");
+  const firstSectionId = links[0].getAttribute("href").substring(1);
+  title.textContent = firstSectionId.charAt(0).toUpperCase() + firstSectionId.slice(1);
+  content.innerHTML = `<p>${sectionContent[firstSectionId]}</p>`;
+});
+
+  
+  </script>
 </body>
 </html>
