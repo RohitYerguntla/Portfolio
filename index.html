@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Navigation Page</title>
+    <!-- <link rel="stylesheet" href="3.css"> -->
+    <!-- <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+
+/* General Reset */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    height: 7vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+}
+
+header h1 {
+    margin: 0;
+}
+
+/* Toggle button positioned at the top-left corner */
+#toggleNav {
+    position: fixed; /* Fixed at the top-left corner */
+    top: 10px;       /* Distance from the top */
+    left: 10px;      /* Distance from the left */
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 1100; /* Ensure it stays above other elements */
+    border-radius: 5px;
+}
+
+#toggleNav:hover {
+    background-color: #555; /* Change color on hover */
+}
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+nav {
+    width: 250px;
+    background-color: #f4f4f4;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.4s ease;
+    /* ease-in-out */
+}
+
+nav.hidden {
+    transform: translateX(-250px);
+}
+
+nav .profile {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+nav .profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+
+nav .profile h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px 20px;
+}
+
+nav ul li a:hover {
+    background-color: #ddd;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+main section {
+    margin-bottom: 20px;
+}
+main {
+    
+    transition: margin-left 0.4s ease; /*  ease  Smooth transition when toggling the nav */
+    padding: 20px;
+    /* height: 100vh; */
+    background-color: #f9f9f9;
+    overflow-y: auto; /* Allow scrolling if content exceeds viewport */
+}
+
+/* Adjust when navigation is hidden */
+main.collapsed {
+    margin-left: -250px; /* Navigation hidden, reset margin */
+}
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    /* padding: 5px; */
+}
+footer a{
+    padding: 5px;
+    font-size: 20px;
+}
+
+@media screen  and (orientation: portrait)
+{
+    body {
+    width: 100vw;
+    height: 100vh;
+    }
+    header {
+    padding: 10px 20px;
+    display: flex;
+    font-size: 10px;
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+}
+
+nav {
+    width: 100px;
+}
+
+nav.hidden {
+    transform: translateX(-250px);
+}
+
+nav .profile {
+    text-align: center;
+    padding: 5px ;
+    border-bottom: 1px solid #ddd;
+}
+
+nav .profile img {
+    width: 70px;
+    height: 70px;
+    border-radius: 70%;
+    margin-bottom: 10px;
+}
+
+
+nav .profile h3 {
+    font-size: 12px;
+}
+
+/* nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+} */
+
+nav ul li {
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 10px;
+    display: block;
+    padding: 10px 20px;
+}
+
+nav ul li a:hover {
+    background-color: #ddd;
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+main section {
+    margin-bottom: 20px;
+}
+main {
+    
+    transition: margin-left 0.4s ease; /*  ease  Smooth transition when toggling the nav */
+    padding: 20px;
+    font-size: 10px;
+    /* height: 100vh; */
+    background-color: #f9f9f9;
+    overflow-y: auto; /* Allow scrolling if content exceeds viewport */
+}
+
+/* Adjust when navigation is hidden */
+main.collapsed {
+    margin-left: -250px; /* Navigation hidden, reset margin */
+}
+footer a{
+    padding: 3px;
+    font-size: 13px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Profile</h1>
+        <button id="toggleNav">☰</button>
+    </header>
+    
+    <div class="container">
+        <nav id="sidebar">
+            <div class="profile">
+                <img src="./Images/Photo.jpg" alt="Profile Picture">
+                <h3>Rohit Yerguntla</h3>
+            </div>            
+            <ul>
+                <li><a href="#details">Details</a></li>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <section id="details">
+                <h2>Details</h2>
+                <p>This section contains personal details.</p>
+            </section>
+            <section id="results">
+                <h2>Results</h2>
+                <p>This section contains academic or work results.</p>
+            </section>
+            <section id="projects">
+                <h2>Projects</h2>
+                <p>This section showcases projects.</p>
+            </section>
+            <section id="education">
+                <h2>Education</h2>
+                <p>This section highlights educational background.</p>
+            </section>
+        </main>
+    </div>
+    
+    <footer>
+        <p>
+        <a href="http://www.linkedin.com/in/rohit-yerguntla-306802259" style="text-decoration: none; color: rgb(4, 71, 255);" target="_blank"><Span class="bi bi-linkedin"></a></Span>
+        <a href="https://www.rohit.yerguntla19@gmail.com" style="text-decoration: none; color: white;" target="_blank"><Span class="bi bi-envelope-at"></a></Span>
+        <a href="https://wa.me/8180053787" style="text-decoration: none; color: rgb(0, 255, 0);" target="_blank"><Span class="bi bi-whatsapp"></a></Span>
+        <a href="https://www.rohit._.1999.com" style="text-decoration: none; color: rgb(255, 11, 133);" target="_blank"><Span class="bi bi-instagram"></a></Span>
+        
+        <a href="" style="text-decoration: none; color: rgb(1, 166, 255);" target="_blank"><Span class="bi bi-facebook"></a></Span>
+        <a href="" style="text-decoration: none; color: white;" target="_blank"><Span class="bi bi-twitter-x"></a></Span>
+     
+        </p>
+    </footer>
+    
+    <script>
+        // JavaScript to toggle the visibility of the navigation bar
+document.getElementById("toggleNav").addEventListener("click", function () {
+    const sidebar = document.getElementById("sidebar");
+    sidebar.classList.toggle("hidden");
+    const main = document.querySelector('main');
+    main.classList.toggle('collapsed');
+});
+
+    </script>
+    <!-- <script src="3.js"></script> -->
+</body>
+</html>
