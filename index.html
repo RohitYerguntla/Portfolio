@@ -1,307 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Navigation Page</title>
-    <!-- <link rel="stylesheet" href="3.css"> -->
-    <!-- <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css"> -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <style>
-
-/* General Reset */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-}
-
-header {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    display: flex;
-    height: 7vh;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
-}
-
-header h1 {
-    margin: 0;
-}
-
-/* Toggle button positioned at the top-left corner */
-#toggleNav {
-    position: fixed; /* Fixed at the top-left corner */
-    top: 10px;       /* Distance from the top */
-    left: 10px;      /* Distance from the left */
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    z-index: 1100; /* Ensure it stays above other elements */
-    border-radius: 5px;
-}
-
-#toggleNav:hover {
-    background-color: #555; /* Change color on hover */
-}
-
-.container {
-    display: flex;
-    flex: 1;
-}
-
-nav {
-    width: 250px;
-    background-color: #f4f4f4;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    position: relative;
-    transition: transform 0.4s ease;
-    /* ease-in-out */
-}
-
-nav.hidden {
-    transform: translateX(-250px);
-}
-
-nav .profile {
-    text-align: center;
-    padding: 20px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-nav .profile img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-
-nav .profile h3 {
-    margin: 0;
-    font-size: 18px;
-    color: #333;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li {
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    display: block;
-    padding: 10px 20px;
-}
-
-nav ul li a:hover {
-    background-color: #ddd;
-}
-
-main {
-    flex: 1;
-    padding: 20px;
-}
-
-main section {
-    margin-bottom: 20px;
-}
-main {
-    
-    transition: margin-left 0.4s ease; /*  ease  Smooth transition when toggling the nav */
-    padding: 20px;
-    /* height: 100vh; */
-    background-color: #f9f9f9;
-    overflow-y: auto; /* Allow scrolling if content exceeds viewport */
-}
-
-/* Adjust when navigation is hidden */
-main.collapsed {
-    margin-left: -250px; /* Navigation hidden, reset margin */
-}
-
-
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    /* padding: 5px; */
-}
-footer a{
-    padding: 5px;
-    font-size: 20px;
-}
-
-@media screen  and (orientation: portrait)
-{
-    body {
-    width: 100vw;
-    height: 100vh;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Profile</title>
+  <style>
+    * {
+      box-sizing: border-box;
     }
-    header {
-    padding: 10px 20px;
-    display: flex;
-    font-size: 10px;
-    height: 5vh;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
-}
 
-nav {
-    width: 100px;
-}
-
-nav.hidden {
-    transform: translateX(-250px);
-}
-
-nav .profile {
-    text-align: center;
-    padding: 5px ;
-    border-bottom: 1px solid #ddd;
-}
-
-nav .profile img {
-    width: 70px;
-    height: 70px;
-    border-radius: 70%;
-    margin-bottom: 10px;
-}
-
-
-nav .profile h3 {
-    font-size: 12px;
-}
-
-/* nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-} */
-
-nav ul li {
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-size: 10px;
-    display: block;
-    padding: 10px 20px;
-}
-
-nav ul li a:hover {
-    background-color: #ddd;
-}
-
-main {
-    flex: 1;
-    padding: 20px;
-}
-
-main section {
-    margin-bottom: 20px;
-}
-main {
-    
-    transition: margin-left 0.4s ease; /*  ease  Smooth transition when toggling the nav */
-    padding: 20px;
-    font-size: 10px;
-    /* height: 100vh; */
-    background-color: #f9f9f9;
-    overflow-y: auto; /* Allow scrolling if content exceeds viewport */
-}
-
-/* Adjust when navigation is hidden */
-main.collapsed {
-    margin-left: -100px; /* Navigation hidden, reset margin */
-}
-footer a{
-    padding: 3px;
-    font-size: 20px;
+    body, html {
+      margin: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
     }
-}
-    </style>
+
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background-color: #f5f5f5;
+      border-right: 1px solid #ccc;
+      padding: 20px 10px;
+      transition: transform 0.3s ease;
+      text-align: center;
+      overflow-y: auto;
+    }
+
+    .sidebar.hidden {
+      transform: translateX(-100%);
+    }
+
+    .sidebar img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 10px;
+    }
+
+    .sidebar h3 {
+      margin: 10px 0 20px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 12px 10px;
+      margin: 5px 0;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .sidebar ul li:hover,
+    .sidebar ul li.active {
+      background-color: #e0e0e0;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      transition: margin-left 0.3s ease;
+    }
+
+    .header {
+      background-color: #333;
+      color: white;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 20px;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+
+    .content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 30px 40px;
+      background-color: #fafafa;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section h1 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .footer {
+      background-color: #333;
+      color: white;
+      padding: 5px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    th {
+      background-color: #eaeaea;
+    }
+
+/* sidebar hiden */
+     .main.full {
+      margin-left: -250px;
+    }
+
+    .main.with-sidebar {
+      margin-left: 0px;
+    }
+
+    /*  */
+   </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to My Profile</h1>
-        <button id="toggleNav">☰</button>
-    </header>
-    
-    <div class="container">
-        <nav id="sidebar">
-            <div class="profile">
-                <img src="./Images/Photo.jpg" alt="Profile Picture">
-                <h3>Rohit Yerguntla</h3>
-            </div>            
-            <ul>
-                <li><a href="#details">Details</a></li>
-                <li><a href="#results">Results</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#education">Education</a></li>
-            </ul>
-        </nav>
-        
-        <main>
-            <section id="details">
-                <h2>Details</h2>
-                <p>This section contains personal details.</p>
-            </section>
-            <section id="results">
-                <h2>Results</h2>
-                <p>This section contains academic or work results.</p>
-            </section>
-            <section id="projects">
-                <h2>Projects</h2>
-                <a href="https://project.freewebhostmost.com/"><p>This section showcases projects.</p></a>
-            </section>
-            <section id="education">
-                <h2>Education</h2>
-                <p>This section highlights educational background.</p>
-            </section>
-        </main>
-    </div>
-    
-    <footer>
-        <p>
-        <a href="http://www.linkedin.com/in/rohit-yerguntla-306802259" style="text-decoration: none; color: rgb(4, 71, 255);" target="_blank"><Span class="bi bi-linkedin"></a></Span>
-        <a href="https://www.rohit.yerguntla19@gmail.com" style="text-decoration: none; color: white;" target="_blank"><Span class="bi bi-envelope-at"></a></Span>
-        <a href="https://wa.me/8180053787" style="text-decoration: none; color: rgb(0, 255, 0);" target="_blank"><Span class="bi bi-whatsapp"></a></Span>
-        <a href="https://www.instagram.com/rohit._.1999/" style="text-decoration: none; color: rgb(255, 11, 133);" target="_blank"><Span class="bi bi-instagram"></a></Span>
-        
-        <a href="" style="text-decoration: none; color: rgb(1, 166, 255);" target="_blank"><Span class="bi bi-facebook"></a></Span>
-        <a href="" style="text-decoration: none; color: white;" target="_blank"><Span class="bi bi-twitter-x"></a></Span>
-     
-        </p>
-    </footer>
-    
-    <script>
-        // JavaScript to toggle the visibility of the navigation bar
-document.getElementById("toggleNav").addEventListener("click", function () {
-    const sidebar = document.getElementById("sidebar");
-    sidebar.classList.toggle("hidden");
-    const main = document.querySelector('main');
-    main.classList.toggle('collapsed');
-});
+  <div class="container">
 
-    </script>
-    <!-- <script src="3.js"></script> -->
+    <!-- ---------------------------- -->
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <img src="Rohit.jpg" alt="Profile">
+      <h3>ROHIT YERGUNTLA</h3>
+      <ul>
+        <li onclick="showSection('details')" class="active">Details</li>
+        <li onclick="showSection('internship')">Internship</li>
+        <li onclick="showSection('education')">Education</li>
+        <li onclick="showSection('skills')">Skills</li>
+        <li onclick="showSection('projects')">Projects</li>
+        <li onclick="showSection('certificates')">Certificates</li>
+        <li onclick="openResume()">Resume Download</li>        
+      </ul>
+    </div>
+
+    <!-- ---------------------------- -->
+
+    <!-- ---------------------------- -->
+
+
+    <!-- Main Content -->
+    <div class="main with-sidebar" id="main">
+
+
+      <!-- Header -->
+      <div class="header">
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        Welcome to My Profile
+      </div>
+
+      <!-- Content -->
+      <div class="content">
+
+        <div id="details" class="section active">
+          <h1>Details</h1>
+          <p>As a fresher I am actively looking for a job in Java Full Stack Developer, I am Skilled in Java, JavaScript, Bootstrap, HTML5, CSS, And Oracle, with hands-on experience developing a full-stack e-commerce platform as part of a capstone project. Eager to apply my problem-solving skills, technical expertise, and passion for innovation to deliver impactful solutions in a collaborative environment.</p>
+        </div>
+
+        <!-- Internship Section -->
+        <div id="internship" class="section">
+          <h1>Internship</h1>
+          <ol>
+            <li>Naresh I Technologies</li>
+            <ul>
+              <li>Certification in Java Full Stack Development</li>
+              <li>26 Nov 2024 - Present </li>
+            </ul><br>
+
+            <li>Agrawal Technologies Pvt Ltd, Mumbai </li>
+            <ul>
+              <li>Certification in Full Stack Development</li>
+              <li>Feb 2024 - Apr 2024</li>
+            </ul>
+          </ol>
+        </div>
+
+         <!-- Education Section -->
+        <div id="education" class="section">
+          <h1>Education</h1>
+
+          <ol>
+            <li>B.Tech (Electronics Engineering) CGPA: 8.39</li>
+            <ul>
+              <li>Walchand Institute of Technology, Solapur</li>
+              <li>2024</li>
+            </ul><br>
+
+            <li>Diploma (Electronics & Telecommunication) </li>
+            <ul>
+              <li>Government Polytechnic, Solapur</li>
+              <li>2021</li>
+            </ul><br>
+
+            <li>HSC </li>
+            <ul>
+              <li>Kuchan Jr. College, Solapur</li>
+              <li>2018</li>
+            </ul><br>
+
+            <li>SSC</li>
+            <ul>
+              <li>Shree Sai Baba Prashala, Solapur</li>
+              <li>2015</li>
+            </ul><br>
+          </ol>
+
+          <!-- <table>
+            <tr>
+              <th>Course</th>
+              <th>College</th>
+              <th>Stream</th>
+              <th>Percentage</th>
+              <th>YOP</th>
+            </tr>
+            <tr style="text-align: center; height: 40px;">
+                        <td>B.Tech</td>
+                        <td>Walchand Institute of Technology, Solapur</td>
+                        <td>Electronics Engineering</td>
+                        <td>75.01</td>
+                        <td>2021-2024</td>
+                    </tr>
+            <tr style="text-align: center; height: 40px;">
+                        <td>Diploma</td>
+                        <td>Shir Siddheshwar Women's Polytechnic, Solapur</td>
+                        <td>Electronics and Telecommunication</td>
+                        <td>84.76</td>
+                  <td>2018-2021</td>
+              </tr>
+            <tr style="text-align: center; height: 40px;">
+                        <td>SSC</td>
+                        <td>D.R. Shriram English Medium School, Solapur</td>
+                        <td>Secondary School of Certificate</td>
+                        <td>66.6</td>
+                        <td>2017-2018</td>
+            </tr>   
+          </table> -->
+        </div>
+
+        <div id="skills" class="section">
+         <h1>Skills</h1><br>
+         <ul>
+          <li> <b>Frontend : </b><span>HTML, CSS, JavaScript, Bootstrap</span><br><br></li>
+          <li><b>Backend : </b><span>Java, Spring, SpringBoot</span><br><br></li>
+          <li> <b>Database : </b><span>Oracle DB</span><br><br></li>
+          <li><b>Programming Language : </b><span>Java</span><br></li>
+         </ul>
+               
+        </div>
+
+        <div id="projects" class="section">
+          <h1>Projects</h1>
+          <ol>
+            <li><div>
+                    <h4> <a href="" style="text-decoration: none;">Fitzone: Building a Dynamic Gym Website :</a> </h4>
+                    
+                    <p>Developed a dynamic web platform using HTML, CSS, JavaScript focusing on user-friendly design and scalability. Implemented features like scheduling and booking systems to enhance operational efficiency, aligning with principles of modern web application delivery. Fitzone is a responsive and feature-rich gym website designed to offer a seamless user experience for fitness enthusiasts and potential members. Built using modern web technologies, the site provides an engaging interface to showcase gym services, trainer profiles, class schedules, membership plans, and user testimonials.</p>
+                    <p><b>Skill Used : </b>HTML, CSS, JavaScript</p>
+                </div></li>
+          </ol>   
+        </div>
+        
+
+        <div id="certificates" class="section">
+           <h2>Certificates</h2>
+                <ul>
+                    <li>Java programming fundamentals.</li><br>
+                    <li>Networking and Web Technology</li><br>
+                    <li>Responsive Web Development with HTML and CSS</li>
+                </ul>
+        </div>
+
+
+      </div>
+
+      <!-- ---------------------------- -->
+
+     
+
+      <!-- Footer -->
+      <div class="footer">
+        © 2025 Rohit | All rights reserved.
+      </div>
+    </div>
+    <!-- ---------------------------- -->
+
+
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      document.querySelectorAll('.sidebar ul li').forEach(li => {
+        li.classList.remove('active');
+      });
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+   function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const main = document.getElementById('main');
+
+      sidebar.classList.toggle('hidden');
+      main.classList.toggle('with-sidebar');
+      main.classList.toggle('full');
+    }
+
+  //   function downloadResume() {
+  //   const link = document.createElement('a');
+  //   link.href = 'Shweta.pdf'; // Replace with your actual path
+  //   link.download = 'Shweta_Udata.pdf';
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // }
+
+
+  function openResume() {
+    window.open('Rohit.pdf', '_blank'); // Use your actual file path here
+  }
+
+
+  </script>
 </body>
 </html>
